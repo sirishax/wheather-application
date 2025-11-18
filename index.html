@@ -9,16 +9,64 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="scene" aria-hidden="true">
+    <!-- Decorative SVG: animated sun and clouds -->
+    <svg class="decor-svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sunGrad" x1="0" x2="1">
+          <stop offset="0" stop-color="#ffe47a"/>
+          <stop offset="1" stop-color="#ff9a5b"/>
+        </linearGradient>
+        <filter id="blurSmall"><feGaussianBlur stdDeviation="8" /></filter>
+      </defs>
+
+      <g class="sun-group" transform="translate(680,40)">
+        <circle class="sun" cx="0" cy="0" r="36" fill="url(#sunGrad)"/>
+        <g class="rays" opacity="0.15">
+          <g transform="rotate(0)"><rect x="-3" y="-62" width="6" height="18" rx="3" fill="#fff"/></g>
+          <g transform="rotate(45)"><rect x="-3" y="-62" width="6" height="18" rx="3" fill="#fff"/></g>
+          <g transform="rotate(90)"><rect x="-3" y="-62" width="6" height="18" rx="3" fill="#fff"/></g>
+          <g transform="rotate(135)"><rect x="-3" y="-62" width="6" height="18" rx="3" fill="#fff"/></g>
+        </g>
+      </g>
+
+      <g class="clouds" transform="translate(0,30)" fill="#ffffff">
+        <g class="cloud cloud-1" transform="translate(40,40)">
+          <ellipse cx="0" cy="0" rx="34" ry="22" opacity="0.9"/>
+          <ellipse cx="28" cy="-6" rx="26" ry="18" opacity="0.9"/>
+          <ellipse cx="56" cy="2" rx="22" ry="14" opacity="0.9"/>
+        </g>
+        <g class="cloud cloud-2" transform="translate(300,20)">
+          <ellipse cx="0" cy="0" rx="48" ry="30" opacity="0.9"/>
+          <ellipse cx="44" cy="-8" rx="36" ry="24" opacity="0.9"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
   <div class="container">
-    <div class="search-box">
-      <input id="city-input" type="text" placeholder="Enter City Name">
-      <button onclick="searchCity()">Search</button>
+    <div class="top-row">
+      <div class="search-box">
+        <div class="search-field">
+          <input id="city-input" type="text" placeholder="Search city, e.g. London" aria-label="City">
+          <button id="search-btn" class="btn search-btn" onclick="searchCity()" aria-label="Search">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="unit-toggle" title="Toggle Units">
+          <button id="unit-btn" aria-pressed="false">°C</button>
+        </div>
+      </div>
     </div>
-    <div id="weather-data">
-      <div id="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+
+    <div id="weather-data" class="card">
+      <div id="weather-icon" aria-hidden="true"><i class="fas fa-cloud-sun"></i></div>
       <h2 id="city-name">---</h2>
       <p id="temp">--</p>
-      
+
       <div class="weather-info">
         <div class="info-card">
           <h3>Humidity</h3>
@@ -38,8 +86,17 @@
         </div>
       </div>
     </div>
-    <div id="recent-searches"></div>
+
+    <div id="recent-searches" class="recent"></div>
+    <footer class="credit">developed by Sirisha </footer>
   </div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
